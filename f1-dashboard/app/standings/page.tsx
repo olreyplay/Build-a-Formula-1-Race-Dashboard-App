@@ -1,4 +1,4 @@
-import Link from "next/link";
+import SeasonSelector from "@/components/SeasonSelector";
 
 async function getDriverStandings(season: string) {
   const res = await fetch(
@@ -9,8 +9,6 @@ async function getDriverStandings(season: string) {
 
   return data.MRData.StandingsTable.StandingsLists[0]?.DriverStandings || [];
 }
-
-const seasons = ["2023", "2024", "2025", "2026"];
 
 export default async function StandingsPage({
   searchParams,
@@ -25,25 +23,7 @@ export default async function StandingsPage({
       <div className="flex flex-col gap-4 mb-6 sm:flex-row sm:items-center sm:justify-between">
         <h2 className="text-2xl font-semibold">Driver Standings</h2>
 
-        <div className="flex flex-wrap gap-2">
-          {seasons.map((year) => {
-            const isActive = year === season;
-
-            return (
-              <Link
-                key={year}
-                href={`/standings?season=${year}`}
-                className={`px-3 py-1.5 rounded-lg text-sm border transition ${
-                  isActive
-                    ? "bg-red-500 text-white border-red-500"
-                    : "border-neutral-700 text-neutral-300 hover:border-red-500/40 hover:text-white"
-                }`}
-              >
-                {year}
-              </Link>
-            );
-          })}
-        </div>
+        <SeasonSelector currentSeason={season} basePath="/standings" />
       </div>
 
       <div className="space-y-4">
