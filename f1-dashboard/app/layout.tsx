@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Link from "next/link";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,11 +24,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col">{children}</body>
+    <html lang="en">
+      <body className="bg-neutral-950 text-neutral-100">
+        <div className="min-h-screen flex flex-col">
+          <header className="border-b border-neutral-800 bg-neutral-900/80 backdrop-blur">
+            <div className="max-w-5xl mx-auto flex items-center justify-between p-4">
+              <h1 className="font-semibold tracking-wide text-red-500">
+                F1 Dashboard
+              </h1>
+
+              <nav className="flex gap-6 text-sm text-neutral-300">
+                <Link href="/" className="hover:text-white transition">
+                  Home
+                </Link>
+                <Link href="/standings" className="hover:text-white transition">
+                  Standings
+                </Link>
+                <Link href="/races" className="hover:text-white transition">
+                  Races
+                </Link>
+              </nav>
+            </div>
+          </header>
+
+          <main className="flex-1 max-w-5xl mx-auto w-full p-6">
+            {children}
+          </main>
+        </div>
+      </body>
     </html>
   );
 }

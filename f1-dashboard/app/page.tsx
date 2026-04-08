@@ -1,7 +1,11 @@
 export default function Home() {
   return (
-    <main className="p-6">
-      <h1 className="text-2xl font-bold">F1 Dashboard</h1>
+    <main>
+      <h2 className="text-2xl font-bold mb-4">Season Overview</h2>
+
+      <p>
+        This page will show key information about the current Formula 1 season.
+      </p>
     </main>
   );
 }
