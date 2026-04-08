@@ -1,5 +1,29 @@
 import SeasonSelector from "@/components/SeasonSelector";
 
+interface Driver {
+  givenName?: string;
+  familyName?: string;
+}
+
+interface Result {
+  Driver?: Driver;
+  Time?: {
+    time: string;
+  };
+}
+
+interface Circuit {
+  circuitName?: string;
+}
+
+interface Race {
+  round: string;
+  raceName: string;
+  Circuit?: Circuit;
+  date: string;
+  Results?: Result[];
+}
+
 async function getRaceWinners(season: string) {
   const res = await fetch(
     `https://api.jolpi.ca/ergast/f1/${season}/results/1.json?limit=100`,
@@ -27,7 +51,7 @@ export default async function RacesPage({
       </div>
 
       <div className="space-y-4">
-        {races.map((race: any) => {
+        {races.map((race: Race) => {
           const winner = race.Results?.[0];
 
           const winnerName = winner

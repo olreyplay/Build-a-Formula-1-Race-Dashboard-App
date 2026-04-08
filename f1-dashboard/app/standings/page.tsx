@@ -1,6 +1,19 @@
 import Link from "next/link";
 import SeasonSelector from "@/components/SeasonSelector";
 
+interface Driver {
+  position: string;
+  points: string;
+  Driver: {
+    driverId: string;
+    givenName: string;
+    familyName: string;
+  };
+  Constructors: {
+    name: string;
+  }[];
+}
+
 async function getDriverStandings(season: string) {
   const res = await fetch(
     `https://api.jolpi.ca/ergast/f1/${season}/driverstandings.json`,
@@ -28,7 +41,7 @@ export default async function StandingsPage({
       </div>
 
       <div className="space-y-4">
-        {standings.map((driver: any) => (
+        {standings.map((driver: Driver) => (
           <div
             key={driver.position}
             className="p-4 rounded-xl bg-neutral-900 border border-neutral-800"
