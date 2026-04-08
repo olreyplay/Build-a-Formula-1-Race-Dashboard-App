@@ -1,3 +1,5 @@
+import RaceCard from "@/components/RaceCard";
+
 async function getRaces() {
   const res = await fetch("https://api.jolpi.ca/ergast/f1/2023.json");
 
@@ -11,17 +13,11 @@ export default async function Home() {
 
   return (
     <main>
-      <h2 className="text-2xl font-bold mb-6">Race Calendar</h2>
+      <h2 className="text-2xl font-semibold mb-6">Race Calendar</h2>
 
-      <div className="grid gap-4">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {races.map((race: any) => (
-          <div key={race.round} className="p-4 bg-white rounded-lg shadow">
-            <h3 className="font-semibold">{race.raceName}</h3>
-
-            <p className="text-sm text-gray-600">{race.Circuit.circuitName}</p>
-
-            <p className="text-sm">{race.date}</p>
-          </div>
+          <RaceCard key={race.round} race={race} />
         ))}
       </div>
     </main>
