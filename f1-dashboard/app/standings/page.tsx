@@ -1,3 +1,4 @@
+import Link from "next/link";
 import SeasonSelector from "@/components/SeasonSelector";
 
 async function getDriverStandings(season: string) {
@@ -37,7 +38,12 @@ export default async function StandingsPage({
                 <p className="text-sm text-red-400 mb-1">#{driver.position}</p>
 
                 <h3 className="text-lg font-semibold">
-                  {driver.Driver.givenName} {driver.Driver.familyName}
+                  <Link
+                    href={`/drivers/${driver.Driver.driverId}?season=${season}`}
+                    className="hover:text-red-400 transition"
+                  >
+                    {driver.Driver.givenName} {driver.Driver.familyName}
+                  </Link>
                 </h3>
 
                 <p className="text-sm text-neutral-400">
