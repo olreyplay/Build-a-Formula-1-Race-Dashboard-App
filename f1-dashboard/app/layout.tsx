@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-
+import { Suspense } from "react";
 import HeaderNav from "@/components/HeaderNav";
 import "./globals.css";
 
@@ -22,7 +22,9 @@ export default function RootLayout({
               <h1 className="font-semibold tracking-wide text-red-500">
                 F1 Dashboard
               </h1>
-              <HeaderNav />
+              <Suspense fallback={<div>Loading...</div>}>
+                <HeaderNav />
+              </Suspense>
             </div>
           </header>
           <main className="flex-1 max-w-5xl mx-auto w-full p-6">
